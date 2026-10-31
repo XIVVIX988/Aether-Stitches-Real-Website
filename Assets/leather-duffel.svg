@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" role="img" aria-label="Leather weekend duffel placeholder">
+  <defs><linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a7653c"/><stop offset="1" stop-color="#603721"/></linearGradient><filter id="shadow" x="-.3" y="-.3" width="1.6" height="1.6"><feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#39291f" flood-opacity=".22"/></filter></defs>
+  <rect width="800" height="960" fill="#f2efe8"/><circle cx="617" cy="180" r="135" fill="#e8e1d5"/><ellipse cx="400" cy="716" rx="245" ry="31" fill="#d6cfc4" opacity=".58"/>
+  <g filter="url(#shadow)">
+    <path d="M293 384c0-97 37-144 107-144s107 47 107 144" fill="none" stroke="#593721" stroke-width="22"/>
+    <path d="M180 410q0-28 29-28h382q29 0 29 28l-15 235q-2 34-35 34H230q-33 0-35-34z" fill="url(#leather)"/>
+    <path d="M209 413h382l-13 214H222z" fill="none" stroke="#d5a078" stroke-width="4" stroke-dasharray="2 11"/>
+    <path d="M205 463h390v46H205z" fill="#6d4028"/>
+    <path d="M242 508h90v91h-90zM468 508h90v91h-90z" fill="#875333" stroke="#5b3826" stroke-width="4"/>
+    <path d="M385 414h30v52h-30z" fill="#c4a36d"/><path d="M385 515h30v51h-30z" fill="#c4a36d"/>
+  </g>
+  <text x="400" y="790" text-anchor="middle" fill="#8d775e" font-family="Arial,sans-serif" font-size="20" letter-spacing="7">AETHER STITCHES</text>
+  <text x="400" y="825" text-anchor="middle" fill="#a59580" font-family="Arial,sans-serif" font-size="14" letter-spacing="4">LEATHER GOODS</text>
+</svg>

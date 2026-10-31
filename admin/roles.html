@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Team & Permissions — Aether Stitches Admin</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script defer src="../JS/script.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-side">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">A</span>
+          <span class="brand-name">
+            Aether Stitches
+            <small>Admin workspace</small>
+          </span>
+        </a>
+        <nav class="admin-nav">
+          <a href="index.html">▦ Dashboard</a>
+          <a href="products.html">◫ Products</a>
+          <a href="custom-requests.html">✦ Custom requests</a>
+          <a class="active" href="roles.html">♙ Team & permissions</a>
+          <a href="../index.html" style="margin-top:20px">↗ View storefront</a>
+        </nav>
+      </aside>
+      <!-- Main page content -->
+      <main class="admin-main">
+        <div class="admin-top">
+          <div>
+            <span class="eyebrow">Secure access</span>
+            <h1>Team & permissions</h1>
+          </div>
+          <button class="button button-gold" data-admin-add>+ Invite team member</button>
+        </div>
+        <section class="admin-panel">
+          <h2>Role-based access</h2>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Permissions</th>
+                <th>Users</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Owner</td>
+                <td>Full access to all areas</td>
+                <td>1</td>
+                <td>
+                  <span class="status">Active</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Catalogue Manager</td>
+                <td>Products, prices, stock and collections</td>
+                <td>2</td>
+                <td>
+                  <span class="status">Active</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Orders Manager</td>
+                <td>Orders, payments and fulfilment</td>
+                <td>1</td>
+                <td>
+                  <span class="status">Active</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Custom Orders Manager</td>
+                <td>Custom requests, estimates and production</td>
+                <td>1</td>
+                <td>
+                  <span class="status">Active</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Content Editor</td>
+                <td>Website pages and content</td>
+                <td>1</td>
+                <td>
+                  <span class="status">Active</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="admin-panel">
+          <h2>Access and security</h2>
+          <p class="small muted">This screen is a visual prototype. It does not authenticate users or enforce permissions. A production dashboard needs secure sign-in, server-side role checks, and an audit trail.</p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

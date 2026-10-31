@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" role="img" aria-label="Leather belt placeholder">
+  <defs><linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a7653c"/><stop offset="1" stop-color="#603721"/></linearGradient><filter id="shadow" x="-.3" y="-.3" width="1.6" height="1.6"><feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#39291f" flood-opacity=".2"/></filter></defs>
+  <rect width="800" height="960" fill="#f2efe8"/><circle cx="180" cy="205" r="130" fill="#e8e1d5"/>
+  <g filter="url(#shadow)" transform="rotate(-13 400 485)">
+    <path d="M135 410h416v92H135z" rx="20" fill="url(#leather)"/>
+    <path d="M162 428h357v56H162z" fill="none" stroke="#d5a078" stroke-width="4" stroke-dasharray="2 11"/>
+    <path d="M518 387h91v139h-91v-24h60v-91h-60z" fill="#c3a66e" stroke="#8d7247" stroke-width="8"/>
+    <path d="M575 422v68" stroke="#8d7247" stroke-width="10"/>
+    <path d="M602 432h60v46h-60z" fill="url(#leather)"/>
+  </g>
+  <text x="400" y="690" text-anchor="middle" fill="#8d775e" font-family="Arial,sans-serif" font-size="20" letter-spacing="7">AETHER STITCHES</text>
+  <text x="400" y="725" text-anchor="middle" fill="#a59580" font-family="Arial,sans-serif" font-size="14" letter-spacing="4">LEATHER ACCESSORIES</text>
+</svg>

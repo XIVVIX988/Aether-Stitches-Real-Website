@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" role="img" aria-label="Leather jacket placeholder">
+  <defs><linearGradient id="leather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a7653c"/><stop offset=".55" stop-color="#75432c"/><stop offset="1" stop-color="#4c2f23"/></linearGradient><filter id="shadow" x="-.3" y="-.2" width="1.6" height="1.6"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#39291f" flood-opacity=".2"/></filter></defs>
+  <rect width="800" height="960" fill="#f2efe8"/><circle cx="625" cy="190" r="140" fill="#e8e1d5"/>
+  <g filter="url(#shadow)">
+    <path d="m292 250 108-55 108 55 115 82-76 126-56-33v310H309V425l-56 33-76-126z" fill="url(#leather)"/>
+    <path d="m292 250 108 90 108-90-39-26-69 64-69-64z" fill="#bd8055"/>
+    <path d="m400 340v395M309 425l91 60 91-60" fill="none" stroke="#d5a078" stroke-width="5"/>
+    <path d="M274 361 217 465M526 361l57 104" stroke="#d5a078" stroke-width="4" stroke-dasharray="2 11"/>
+    <path d="M319 574h56v76h-56zM425 574h56v76h-56z" fill="#603923" stroke="#d5a078" stroke-width="3"/>
+    <path d="M386 318h28v26h-28z" fill="#c9a66f"/>
+  </g>
+  <text x="400" y="830" text-anchor="middle" fill="#8d775e" font-family="Arial,sans-serif" font-size="20" letter-spacing="7">AETHER STITCHES</text>
+  <text x="400" y="865" text-anchor="middle" fill="#a59580" font-family="Arial,sans-serif" font-size="14" letter-spacing="4">MADE TO ORDER</text>
+</svg>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Products — Aether Stitches Admin</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script defer src="../JS/script.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-side">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">A</span>
+          <span class="brand-name">
+            Aether Stitches
+            <small>Admin workspace</small>
+          </span>
+        </a>
+        <nav class="admin-nav">
+          <a href="index.html">▦ Dashboard</a>
+          <a class="active" href="products.html">◫ Products</a>
+          <a href="custom-requests.html">✦ Custom requests</a>
+          <a href="roles.html">♙ Team & permissions</a>
+          <a href="../index.html" style="margin-top:20px">↗ View storefront</a>
+        </nav>
+      </aside>
+      <!-- Main page content -->
+      <main class="admin-main">
+        <div class="admin-top">
+          <div>
+            <span class="eyebrow">Catalogue & stock</span>
+            <h1>Products</h1>
+          </div>
+          <button class="button button-gold" data-admin-add>+ Add product</button>
+        </div>
+        <section class="admin-panel">
+          <div class="shop-topline">
+            <span>8 products · Manage your catalogue</span>
+            <select>
+              <option>All categories</option>
+              <option>Leather goods</option>
+              <option>Apparel</option>
+            </select>
+          </div>
+          <table class="admin-table" data-admin-table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Leather Tote Bag</td>
+                <td>Leather Goods</td>
+                <td>KSh 12,500</td>
+                <td>14</td>
+                <td>
+                  <span class="status">Published</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Classic Backpack</td>
+                <td>Leather Goods</td>
+                <td>KSh 18,500</td>
+                <td>6</td>
+                <td>
+                  <span class="status">Published</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Everyday Wallet</td>
+                <td>Leather Goods</td>
+                <td>KSh 6,500</td>
+                <td>22</td>
+                <td>
+                  <span class="status">Published</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Hand-finished Belt</td>
+                <td>Accessories</td>
+                <td>KSh 4,500</td>
+                <td>18</td>
+                <td>
+                  <span class="status">Published</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Leather Field Jacket</td>
+                <td>Apparel</td>
+                <td>KSh 9,800</td>
+                <td>Made to order</td>
+                <td>
+                  <span class="status">Published</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Crossbody Satchel</td>
+                <td>Leather Goods</td>
+                <td>KSh 10,000</td>
+                <td>9</td>
+                <td>
+                  <span class="status">Published</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="admin-panel">
+          <h2>Catalogue notes</h2>
+          <p class="small muted">Product edits in this static preview are saved only in this browser. Connect a secure backend before using staff management or publishing real stock and pricing.</p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

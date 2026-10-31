@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Shop — Aether Stitches</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script defer src="JS/script.js"></script>
+  </head>
+  <body>
+    <!-- Shared site header -->
+    <div data-site-header></div>
+    <!-- Main page content -->
+    <main>
+      <section class="subhero">
+        <div class="subhero-inner">
+          <span class="eyebrow">Quality · Craft · Individuality</span>
+          <h1>Shop our collection</h1>
+          <p>Thoughtful pieces for wherever the day takes you.</p>
+        </div>
+      </section>
+      <div class="container">
+        <div class="breadcrumb">Home › Shop</div>
+        <section class="shop-layout" data-shop>
+          <aside class="filters">
+            <div class="filter-group">
+              <h4>Categories</h4>
+              <label>
+                <input type="checkbox" data-filter value="Leather Goods">
+                Leather goods
+              </label>
+              <label>
+                <input type="checkbox" data-filter value="Apparel">
+                Apparel
+              </label>
+              <label>
+                <input type="checkbox" data-filter value="Accessories">
+                Accessories
+              </label>
+            </div>
+            <div class="filter-group">
+              <h4>Search</h4>
+              <input data-search placeholder="Find a piece…" style="width:100%;padding:10px;border:1px solid var(--line)">
+            </div>
+            <div class="filter-group">
+              <h4>Availability</h4>
+              <label>
+                <input type="checkbox">
+                In stock
+              </label>
+              <label>
+                <input type="checkbox">
+                Made to order
+              </label>
+            </div>
+            <div class="filter-group">
+              <h4>Need something personal?</h4>
+              <p class="small muted">We also make to your vision.</p>
+              <a class="button button-outline" href="bespoke.html">Explore bespoke</a>
+            </div>
+          </aside>
+          <div>
+            <div class="shop-topline">
+              <span data-result-count>Showing products</span>
+              <label>
+                Sort by
+                <select data-sort>
+                  <option value="featured">Featured</option>
+                  <option value="price-low">Price: low to high</option>
+                  <option value="price-high">Price: high to low</option>
+                </select>
+              </label>
+            </div>
+            <div class="product-grid shop-grid" data-products></div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Shared site footer -->
+    <div data-site-footer></div>
+  </body>
+</html>

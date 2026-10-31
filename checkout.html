@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Checkout — Aether Stitches</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script defer src="JS/script.js"></script>
+  </head>
+  <body>
+    <!-- Shared site header -->
+    <div data-site-header></div>
+    <!-- Main page content -->
+    <main class="container">
+      <div class="breadcrumb">Home › Your bag › Checkout</div>
+      <section class="section" style="padding-top:10px">
+        <span class="eyebrow">Almost yours</span>
+        <h1 style="font-size:44px">Checkout</h1>
+        <form class="checkout-layout" data-checkout>
+          <div>
+            <div class="checkout-section">
+              <h3>Contact details</h3>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Full name</label>
+                  <input required placeholder="Full name">
+                </div>
+                <div class="field">
+                  <label>Email</label>
+                  <input required type="email" placeholder="you@example.com">
+                </div>
+                <div class="field">
+                  <label>Phone / WhatsApp</label>
+                  <input required type="tel" placeholder="+254">
+                </div>
+              </div>
+            </div>
+            <div class="checkout-section">
+              <h3>Delivery address</h3>
+              <div class="form-grid">
+                <div class="field full">
+                  <label>Address</label>
+                  <input required placeholder="Street, estate or landmark">
+                </div>
+                <div class="field">
+                  <label>Town / City</label>
+                  <input required placeholder="Town or city">
+                </div>
+                <div class="field">
+                  <label>Country</label>
+                  <select>
+                    <option>Kenya</option>
+                    <option>Uganda</option>
+                    <option>Tanzania</option>
+                    <option>Rwanda</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label>Delivery notes</label>
+                  <input placeholder="Optional">
+                </div>
+              </div>
+            </div>
+            <div class="checkout-section">
+              <h3>Payment method</h3>
+              <label class="filter-group">
+                <input type="radio" name="payment" checked>
+                M-Pesa
+              </label>
+              <label class="filter-group">
+                <input type="radio" name="payment">
+                Bank transfer
+              </label>
+              <label class="filter-group">
+                <input type="radio" name="payment">
+                Debit or credit card
+              </label>
+              <p class="small muted">This is a front-end demo. No payment will be collected.</p>
+            </div>
+            <button class="button button-gold">Place demo order</button>
+          </div>
+          <aside class="summary">
+            <h3>Order summary</h3>
+            <div class="summary-line">
+              <span>Items in your bag</span>
+              <b class="cart-count">0</b>
+            </div>
+            <div class="summary-line">
+              <span>Delivery in Kenya</span>
+              <span>Free</span>
+            </div>
+            <p class="small muted">Your final order total will be confirmed with our team.</p>
+          </aside>
+        </form>
+      </section>
+    </main>
+    <!-- Shared site footer -->
+    <div data-site-footer></div>
+  </body>
+</html>

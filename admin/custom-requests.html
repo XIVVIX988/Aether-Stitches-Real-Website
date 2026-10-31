@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Custom Requests — Aether Stitches Admin</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script defer src="../JS/script.js"></script>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside class="admin-side">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">A</span>
+          <span class="brand-name">
+            Aether Stitches
+            <small>Admin workspace</small>
+          </span>
+        </a>
+        <nav class="admin-nav">
+          <a href="index.html">▦ Dashboard</a>
+          <a href="products.html">◫ Products</a>
+          <a class="active" href="custom-requests.html">✦ Custom requests</a>
+          <a href="roles.html">♙ Team & permissions</a>
+          <a href="../index.html" style="margin-top:20px">↗ View storefront</a>
+        </nav>
+      </aside>
+      <!-- Main page content -->
+      <main class="admin-main">
+        <div class="admin-top">
+          <div>
+            <span class="eyebrow">From first idea to final stitch</span>
+            <h1>Custom requests</h1>
+          </div>
+          <button class="button button-gold" data-admin-add>+ Add request</button>
+        </div>
+        <section class="admin-panel">
+          <div class="shop-topline">
+            <span>8 requests · 3 need review</span>
+            <select>
+              <option>All statuses</option>
+              <option>New</option>
+              <option>In review</option>
+              <option>Quoted</option>
+            </select>
+          </div>
+          <table class="admin-table" data-admin-table>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Product type</th>
+                <th>Route</th>
+                <th>Estimate</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>James O.</td>
+                <td>Travel bag</td>
+                <td>Inspiration</td>
+                <td>KSh 18,000</td>
+                <td>
+                  <span class="status pending">New</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Esther W.</td>
+                <td>Work tote</td>
+                <td>Own design</td>
+                <td>KSh 14,500</td>
+                <td>
+                  <span class="status pending">Review</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Peter A.</td>
+                <td>Leather jacket</td>
+                <td>Modify existing</td>
+                <td>Pending</td>
+                <td>
+                  <span class="status">In discussion</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Faith N.</td>
+                <td>Wallet set</td>
+                <td>Describe idea</td>
+                <td>KSh 8,200</td>
+                <td>
+                  <span class="status">Quoted</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="admin-panel">
+          <h2>Request workflow</h2>
+          <p class="small muted">Review the customer's idea and reference images, confirm requirements, prepare an indicative estimate, then issue the final quotation for approval. Record the agreed deposit before production begins.</p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

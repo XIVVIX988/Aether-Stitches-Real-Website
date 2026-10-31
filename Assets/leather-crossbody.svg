@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" role="img" aria-label="Leather crossbody bag placeholder">
+  <defs><linearGradient id="leather" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bd8052"/><stop offset=".5" stop-color="#87492d"/><stop offset="1" stop-color="#5a3424"/></linearGradient><filter id="shadow" x="-.3" y="-.2" width="1.6" height="1.6"><feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#39291f" flood-opacity=".22"/></filter></defs>
+  <rect width="800" height="960" fill="#f2efe8"/><circle cx="185" cy="190" r="125" fill="#e8e1d5"/><ellipse cx="405" cy="720" rx="210" ry="31" fill="#d6cfc4" opacity=".58"/>
+  <g filter="url(#shadow)">
+    <path d="M253 382 340 221q60-110 120 0l88 161" fill="none" stroke="#633923" stroke-width="22"/>
+    <path d="M235 372h330l-15 291q-2 26-30 26H280q-28 0-30-26z" fill="url(#leather)"/>
+    <path d="M257 394h286l-13 239H270z" fill="none" stroke="#d6a27b" stroke-width="4" stroke-dasharray="2 11"/>
+    <path d="M235 373h330v62H235z" fill="#a96a43"/>
+    <path d="M354 435h92v103h-92z" fill="#76432b"/>
+    <path d="M387 461h26v37h-26z" fill="#d0ae79"/>
+  </g>
+  <text x="400" y="790" text-anchor="middle" fill="#8d775e" font-family="Arial,sans-serif" font-size="20" letter-spacing="7">AETHER STITCHES</text>
+  <text x="400" y="825" text-anchor="middle" fill="#a59580" font-family="Arial,sans-serif" font-size="14" letter-spacing="4">LEATHER GOODS</text>
+</svg>
