@@ -40,6 +40,7 @@ button,input,textarea,select {
 }
 button,.button {
   border: 0;
+  border-radius: 4px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1889,7 +1890,7 @@ body {
 
 .hero-actions {
   justify-content: center;
-  gap: 15px;
+  gap: 22px;
   margin-top: 4px;
 }
 

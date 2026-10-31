@@ -68,7 +68,10 @@ const formatPrice = (amount) =>
   `KSh ${Number(amount).toLocaleString("en-KE")}`;
 
 function readCart() {
-  return JSON.parse(localStorage.getItem("aether-cart") || "[]");
+  const savedCart = JSON.parse(localStorage.getItem("aether-cart") || "[]");
+  return Array.isArray(savedCart)
+    ? savedCart.filter((item) => products.some((product) => product.id === item.id))
+    : [];
 }
 
 function writeCart(items) {
@@ -86,7 +89,10 @@ function updateCartCount() {
 
 function readWishlist() {
   try {
-    return JSON.parse(localStorage.getItem("aether-wishlist") || "[]");
+    const savedWishlist = JSON.parse(localStorage.getItem("aether-wishlist") || "[]");
+    return Array.isArray(savedWishlist)
+      ? savedWishlist.filter((id) => products.some((product) => product.id === id))
+      : [];
   } catch {
     return [];
   }
