@@ -176,7 +176,18 @@ function addToCart(productId, quantity = 1, options = {}) {
   }
 
   writeCart(cart);
+  animateCartIcon();
   showToast("Added to your bag");
+}
+
+function animateCartIcon() {
+  document.querySelectorAll(".bag-link").forEach((link) => {
+    link.classList.remove("cart-pop");
+    // Restart the short animation when another item is added quickly.
+    void link.offsetWidth;
+    link.classList.add("cart-pop");
+    window.setTimeout(() => link.classList.remove("cart-pop"), 750);
+  });
 }
 
 function productCard(product) {

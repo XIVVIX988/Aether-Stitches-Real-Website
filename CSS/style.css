@@ -171,6 +171,36 @@ button:hover,.button:hover {
   stroke-linejoin: round;
   stroke-width: 1.5;
 }
+
+/* A quick bounce acknowledges each successful add-to-bag action. */
+.bag-link.cart-pop .bag-icon {
+  transform-origin: center 72%;
+  animation: cart-bounce .68s cubic-bezier(.2,.8,.3,1.25);
+}
+
+.bag-link.cart-pop .cart-count {
+  animation: cart-badge-pop .62s ease-out;
+}
+
+@keyframes cart-bounce {
+  0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+  28% { transform: translateY(-7px) rotate(-12deg) scale(1.12); }
+  52% { transform: translateY(1px) rotate(9deg) scale(.96); }
+  72% { transform: translateY(-3px) rotate(-4deg) scale(1.04); }
+}
+
+@keyframes cart-badge-pop {
+  0%, 100% { transform: scale(1); }
+  35% { transform: scale(1.45); }
+  65% { transform: scale(.88); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bag-link.cart-pop .bag-icon,
+  .bag-link.cart-pop .cart-count {
+    animation: none;
+  }
+}
 .search-link {
   display: inline-flex;
   align-items: center;
