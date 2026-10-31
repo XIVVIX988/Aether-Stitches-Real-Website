@@ -218,6 +218,39 @@ button:hover,.button:hover {
   line-height: 13px;
   text-align: center;
 }
+.wishlist-link {
+  position: relative;
+  display: inline-flex;
+  width: 30px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+}
+.wishlist-nav-icon {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+.wishlist-count {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  min-width: 15px;
+  height: 15px;
+  padding: 1px 4px;
+  border: 1px solid var(--cream);
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 9px;
+  line-height: 13px;
+  text-align: center;
+}
 .mobile-menu {
   display: none;
 }
@@ -318,7 +351,7 @@ h3 {
 /* Storefront sections and product cards */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(2,1fr);
   gap: 16px;
 }
 .category-card {
@@ -566,16 +599,56 @@ h3 {
   flex-direction: column;
   gap: 9px;
 }
-.thumbs img {
-  aspect-ratio: 1;
+.thumbs .gallery-thumb {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid transparent;
+  background: var(--cream);
   cursor: pointer;
+}
+.thumbs .gallery-thumb img {
+  aspect-ratio: 1;
+  transition: transform .2s, opacity .2s;
+}
+.thumbs .gallery-thumb:hover img {
+  transform: scale(1.04);
+  opacity: .88;
+}
+.thumbs .gallery-thumb.selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.thumbs .gallery-thumb:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
 }
 .main-product-image {
   height: 600px;
+  overflow: hidden;
   background: var(--cream);
+  cursor: zoom-in;
 }
 .main-product-image img {
   height: 100%;
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform .16s ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .main-product-image.is-zooming img {
+    transform: scale(1.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-product-image img {
+    transition: none;
+  }
 }
 .detail-copy {
   padding-top: 28px;
@@ -629,7 +702,11 @@ h3 {
   padding: 12px;
 }
 .purchase-row .button {
-  flex: 1;
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 11px 16px;
+  font-size: 11px;
+  letter-spacing: .08em;
 }
 .details-tabs {
   border-top: 1px solid var(--line);
@@ -2133,23 +2210,32 @@ body:has(.hero) .split + .section { order: 4; }
   gap: 10px;
   min-height: 54px;
   padding: 0 20px;
-  border: 1px solid rgba(0,0,0,.12);
+  border: 1px solid rgba(13,13,13,.24);
   border-radius: 999px;
-  background: #25d366;
-  color: #092b16;
+  background: var(--gold);
+  color: var(--ink);
   box-shadow: 0 8px 24px rgba(0,0,0,.24);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
   transition: transform .2s, box-shadow .2s, background-color .2s;
+  animation: whatsapp-radiance 2.4s ease-in-out infinite;
 }
 
 .whatsapp-float:hover {
   transform: translateY(-2px);
-  background: #32df73;
-  color: #092b16;
-  box-shadow: 0 12px 28px rgba(0,0,0,.28);
+  background: #cf9d2e;
+  color: var(--ink);
+}
+
+@keyframes whatsapp-radiance {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(0,0,0,.24), 0 0 0 0 rgba(227,183,75,.42);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(0,0,0,.24), 0 0 22px 7px rgba(227,183,75,.5);
+  }
 }
 
 .whatsapp-float:focus-visible {
@@ -2164,7 +2250,199 @@ body:has(.hero) .split + .section { order: 4; }
   fill: currentColor;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    animation: none;
+  }
+}
+
+/* Product variant choices use explicit contrast and a clear selected state. */
+.detail-copy .option-label {
+  margin: 23px 0 9px;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.option-row {
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.detail-copy .option-chip {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid rgba(13,13,13,.24);
+  border-radius: 3px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.detail-copy .option-chip:hover {
+  border-color: var(--gold);
+  background: #f6e7bd;
+  color: var(--ink);
+}
+
+.detail-copy .option-chip.selected,
+.detail-copy .option-chip.selected:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--cream);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+
+.detail-copy .option-chip:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Clickable product colour palette; the text label above names the selection. */
+.detail-copy .colour-swatch {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border: 2px solid rgba(13,13,13,.2);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--cream);
+  transition: transform .18s, outline-color .18s, box-shadow .18s;
+}
+
+.detail-copy .colour-swatch.chestnut { background: #743e27; }
+.detail-copy .colour-swatch.black { background: #252624; }
+.detail-copy .colour-swatch.tan { background: #b58b58; }
+
+.detail-copy .colour-swatch:hover {
+  transform: scale(1.08);
+}
+
+.detail-copy .colour-swatch.selected {
+  border-color: var(--ink);
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.detail-copy .colour-swatch:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.cart-variant {
+  margin: 7px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Wishlist hearts appear over product cards and beside the detail title. */
+.product-card {
+  position: relative;
+}
+
+.wishlist-button {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(13,13,13,.14);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+  transition: transform .18s, background-color .18s, color .18s;
+}
+
+.product-card > .wishlist-button {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+}
+
+.wishlist-button svg {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill .18s, transform .18s;
+}
+
+.wishlist-button:hover {
+  transform: scale(1.08);
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.wishlist-button[aria-pressed="true"] {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+
+.wishlist-button[aria-pressed="true"] svg {
+  fill: var(--ink);
+}
+
+.wishlist-button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.product-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.product-title-row h1 {
+  flex: 1;
+}
+
+.detail-wishlist {
+  flex: 0 0 42px;
+  margin: 0 0 4px;
+}
+
+.wishlist-page {
+  min-height: 48vh;
+  padding-top: 42px;
+  padding-bottom: 80px;
+}
+
+.wishlist-page .section-head {
+  margin-bottom: 28px;
+}
+
+.wishlist-empty {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 650px) {
+  .nav-actions {
+    gap: 4px;
+  }
+
+  .search-link,
+  .profile-link,
+  .wishlist-link,
+  .bag-link {
+    width: 26px;
+  }
+
   .whatsapp-float {
     right: 16px;
     bottom: 16px;

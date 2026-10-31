@@ -9,7 +9,7 @@ const products = [
   {
     id: "tote",
     name: "Leather Tote Bag",
-    category: "Leather Goods",
+    category: "Bags",
     price: 12500,
     image: "Assets/reference/studio_tote_bag_1785921253592.jpg",
     tag: "Best seller",
@@ -17,14 +17,14 @@ const products = [
   {
     id: "backpack",
     name: "Classic Backpack",
-    category: "Leather Goods",
+    category: "Bags",
     price: 18500,
     image: "Assets/reference/studio_backpack_bag_1785921210073.jpg",
   },
   {
     id: "wallet",
     name: "Everyday Wallet",
-    category: "Leather Goods",
+    category: "Accessories",
     price: 6500,
     image: "Assets/leather-wallet.svg",
   },
@@ -36,24 +36,16 @@ const products = [
     image: "Assets/leather-belt.svg",
   },
   {
-    id: "jacket",
-    name: "Leather Field Jacket",
-    category: "Apparel",
-    price: 9800,
-    image: "Assets/reference/studio_workwear_jacket_1785921270813.jpg",
-    tag: "New",
-  },
-  {
     id: "crossbody",
     name: "Crossbody Satchel",
-    category: "Leather Goods",
+    category: "Bags",
     price: 10000,
     image: "Assets/reference/studio_messenger_bag_1785921225724.jpg",
   },
   {
     id: "duffel",
     name: "Weekend Duffel",
-    category: "Leather Goods",
+    category: "Bags",
     price: 22000,
     image: "Assets/reference/studio_duffel_bag_1785921241197.jpg",
   },
@@ -92,6 +84,67 @@ function updateCartCount() {
   });
 }
 
+function readWishlist() {
+  try {
+    return JSON.parse(localStorage.getItem("aether-wishlist") || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function wishlistButton(product, className = "") {
+  const saved = readWishlist().includes(product.id);
+  const action = saved ? "Remove from wishlist" : "Add to wishlist";
+
+  return `
+    <button type="button" class="wishlist-button ${className}" data-wishlist="${product.id}"
+      data-product-name="${product.name}" aria-pressed="${saved}"
+      aria-label="${action}: ${product.name}" title="${action}">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
+      </svg>
+    </button>`;
+}
+
+function updateWishlistControls() {
+  const wishlist = readWishlist();
+
+  document.querySelectorAll("[data-wishlist]").forEach((button) => {
+    const saved = wishlist.includes(button.dataset.wishlist);
+    const action = saved ? "Remove from wishlist" : "Add to wishlist";
+    button.setAttribute("aria-pressed", String(saved));
+    button.setAttribute("aria-label", `${action}: ${button.dataset.productName}`);
+    button.title = action;
+  });
+
+  document.querySelectorAll(".wishlist-count").forEach((badge) => {
+    badge.textContent = wishlist.length;
+  });
+
+  document.querySelectorAll(".wishlist-link").forEach((link) => {
+    link.setAttribute("aria-label", `Wishlist, ${wishlist.length} saved ${wishlist.length === 1 ? "item" : "items"}`);
+  });
+}
+
+function renderWishlistPage() {
+  const grid = document.querySelector("[data-wishlist-products]");
+  if (!grid) return;
+
+  const savedProducts = products.filter((product) => readWishlist().includes(product.id));
+  if (!savedProducts.length) {
+    grid.innerHTML = `
+      <div class="empty wishlist-empty">
+        <div class="eyebrow">Saved for later</div>
+        <h2>Your wishlist is empty</h2>
+        <p class="muted">Tap the heart on a product to keep it close.</p>
+        <a class="button button-gold" href="shop.html">Explore the shop</a>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = savedProducts.map(productCard).join("");
+}
+
 function showToast(message) {
   const toast = document.createElement("div");
   toast.className = "toast";
@@ -101,14 +154,19 @@ function showToast(message) {
   window.setTimeout(() => toast.remove(), 2600);
 }
 
-function addToCart(productId, quantity = 1) {
+function cartItemKey(item) {
+  return `${item.id}::${item.colour || ""}::${item.size || ""}`;
+}
+
+function addToCart(productId, quantity = 1, options = {}) {
   const cart = readCart();
-  const existingItem = cart.find((item) => item.id === productId);
+  const newItem = { id: productId, qty: 0, ...options };
+  const existingItem = cart.find((item) => cartItemKey(item) === cartItemKey(newItem));
 
   if (existingItem) {
     existingItem.qty += quantity;
   } else {
-    cart.push({ id: productId, qty: quantity });
+    cart.push({ ...newItem, qty: quantity });
   }
 
   writeCart(cart);
@@ -122,6 +180,7 @@ function productCard(product) {
         <img loading="lazy" src="${imageUrl(product.image)}" alt="${product.name}">
         ${product.tag ? `<span class="product-tag">${product.tag}</span>` : ""}
       </a>
+      ${wishlistButton(product)}
       <div class="product-info">
         <div class="product-category">${product.category}</div>
         <h3><a href="product.html?id=${product.id}">${product.name}</a></h3>
@@ -142,6 +201,7 @@ function renderProducts(selector, productList = products) {
 }
 
 // Shared header and footer keep all customer pages visually consistent.
+const pagePrefix = window.location.pathname.toLowerCase().includes("/admin/") ? "../" : "";
 const siteHeader = `
   <div class="announcement">
     <div class="container announcement-inner">
@@ -180,6 +240,12 @@ const siteHeader = `
             <circle cx="12" cy="8" r="3.5"></circle>
             <path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path>
           </svg>
+        </a>
+        <a class="icon-btn wishlist-link" href="${pagePrefix}wishlist.html" aria-label="Wishlist, 0 saved items">
+          <svg class="wishlist-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path>
+          </svg>
+          <sup class="wishlist-count">0</sup>
         </a>
         <a class="icon-btn bag-link" href="cart.html" aria-label="Shopping bag">
           <svg class="bag-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -230,7 +296,7 @@ const siteFooter = `
             <span class="brand-name">AETHER STITCHES<small>CRAFTED IN KENYA</small></span>
           </a>
           <p class="footer-intro">
-            Considered leather goods and apparel, designed and made in Siaya, Kenya.
+            Thoughtful bags and accessories, designed and made in Siaya, Kenya.
           </p>
         </div>
         <div>
@@ -268,21 +334,39 @@ function renderProductDetail() {
 
   const productId = new URLSearchParams(window.location.search).get("id");
   const product = products.find((item) => item.id === productId) || products[0];
+  const sizes = ["One size"];
 
   detail.innerHTML = `
     <div class="gallery">
       <div class="thumbs">
-        <img src="${imageUrl(product.image, 250)}" alt="${product.name}">
-        <img src="${imageUrl("Assets/reference/tote_model_1785920174008.jpg", 250)}" alt="Product in use">
-        <img src="${imageUrl("Assets/reference/aether_artisan_craft_1785587077227.jpg", 250)}" alt="Craft detail">
+        <button type="button" class="gallery-thumb selected" data-gallery-image
+          data-image-src="${imageUrl(product.image, 1200)}" data-image-alt="${product.name}"
+          aria-label="View ${product.name}" aria-pressed="true">
+          <img src="${imageUrl(product.image, 250)}" alt="">
+        </button>
+        <button type="button" class="gallery-thumb" data-gallery-image
+          data-image-src="${imageUrl("Assets/reference/tote_model_1785920174008.jpg", 1200)}"
+          data-image-alt="${product.name} carried in everyday use"
+          aria-label="View ${product.name} in use" aria-pressed="false">
+          <img src="${imageUrl("Assets/reference/tote_model_1785920174008.jpg", 250)}" alt="">
+        </button>
+        <button type="button" class="gallery-thumb" data-gallery-image
+          data-image-src="${imageUrl("Assets/reference/aether_artisan_craft_1785587077227.jpg", 1200)}"
+          data-image-alt="A craftsperson hand-finishing leather goods"
+          aria-label="View Aether Stitches craft detail" aria-pressed="false">
+          <img src="${imageUrl("Assets/reference/aether_artisan_craft_1785587077227.jpg", 250)}" alt="">
+        </button>
       </div>
       <div class="main-product-image">
-        <img src="${imageUrl(product.image, 1200)}" alt="${product.name}">
+        <img data-main-product-image src="${imageUrl(product.image, 1200)}" alt="${product.name}">
       </div>
     </div>
     <div class="detail-copy">
       <div class="eyebrow">${product.category}</div>
-      <h1>${product.name}</h1>
+      <div class="product-title-row">
+        <h1>${product.name}</h1>
+        ${wishlistButton(product, "detail-wishlist")}
+      </div>
       <div class="rating">★★★★★ <span class="muted">(12 reviews)</span></div>
       <div class="detail-price">${formatPrice(product.price)}</div>
       <p class="product-description">
@@ -290,18 +374,26 @@ function renderProductDetail() {
         finished by hand in our Siaya workshop. Each piece carries its own
         natural character.
       </p>
-      <div class="option-label">Colour · Chestnut</div>
-      <div class="option-row">
-        <button class="option-chip selected">Chestnut</button>
-        <button class="option-chip">Black</button>
-        <button class="option-chip">Tan</button>
+      <div class="option-label">Colour · <span data-selected-value="colour">Chestnut</span></div>
+      <div class="option-row" data-option-group="colour" aria-label="Choose a colour">
+        <button type="button" class="colour-swatch selected chestnut" data-option-value="Chestnut"
+          aria-label="Chestnut" title="Chestnut" aria-pressed="true"></button>
+        <button type="button" class="colour-swatch black" data-option-value="Black"
+          aria-label="Black" title="Black" aria-pressed="false"></button>
+        <button type="button" class="colour-swatch tan" data-option-value="Tan"
+          aria-label="Tan" title="Tan" aria-pressed="false"></button>
       </div>
-      <div class="option-label">Size</div>
-      <div class="option-row"><button class="option-chip selected">One size</button></div>
+      <div class="option-label">Size · <span data-selected-value="size">${sizes[0]}</span></div>
+      <div class="option-row" data-option-group="size" aria-label="Choose a size">
+        ${sizes.map((size, index) => `
+          <button type="button" class="option-chip${index === 0 ? " selected" : ""}"
+            data-option-value="${size}" aria-pressed="${index === 0}">${size}</button>
+        `).join("")}
+      </div>
       <div class="purchase-row">
         <input id="quantity" type="number" min="1" value="1" aria-label="Quantity">
         <button class="button" data-add="${product.id}">
-          Add to bag · ${formatPrice(product.price)}
+          Add to bag
         </button>
       </div>
       <p class="small stock-note">✓ In stock · Complimentary delivery within Kenya</p>
@@ -314,9 +406,62 @@ function renderProductDetail() {
       </div>
     </div>`;
 
+  // Thumbnail buttons swap the large image and expose the current selection.
+  const mainProductImage = detail.querySelector("[data-main-product-image]");
+  detail.querySelectorAll("[data-gallery-image]").forEach((thumbnail) => {
+    thumbnail.addEventListener("click", () => {
+      mainProductImage.src = thumbnail.dataset.imageSrc;
+      mainProductImage.alt = thumbnail.dataset.imageAlt;
+
+      detail.querySelectorAll("[data-gallery-image]").forEach((button) => {
+        const selected = button === thumbnail;
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+    });
+  });
+
+  // Move the zoom focus to the pointer so the inspected detail stays beneath it.
+  const imageFrame = detail.querySelector(".main-product-image");
+  imageFrame.addEventListener("pointermove", (event) => {
+    if (event.pointerType === "touch") return;
+
+    const bounds = imageFrame.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+    const clamp = (value) => Math.max(0, Math.min(100, value));
+
+    mainProductImage.style.transformOrigin = `${clamp(x)}% ${clamp(y)}%`;
+    imageFrame.classList.add("is-zooming");
+  });
+
+  imageFrame.addEventListener("pointerleave", () => {
+    imageFrame.classList.remove("is-zooming");
+    mainProductImage.style.transformOrigin = "center center";
+  });
+
+  const selectedOptions = { colour: "Chestnut", size: sizes[0] };
+
+  detail.querySelectorAll("[data-option-group]").forEach((group) => {
+    group.addEventListener("click", (event) => {
+      const choice = event.target.closest("[data-option-value]");
+      if (!choice) return;
+
+      group.querySelectorAll("[data-option-value]").forEach((button) => {
+        const selected = button === choice;
+        button.classList.toggle("selected", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+
+      const optionName = group.dataset.optionGroup;
+      selectedOptions[optionName] = choice.dataset.optionValue;
+      detail.querySelector(`[data-selected-value="${optionName}"]`).textContent = choice.dataset.optionValue;
+    });
+  });
+
   detail.querySelector("[data-add]").addEventListener("click", () => {
     const quantity = Number(detail.querySelector("#quantity").value || 1);
-    addToCart(product.id, quantity);
+    addToCart(product.id, quantity, selectedOptions);
   });
 }
 
@@ -354,13 +499,14 @@ function renderCart() {
               <div>
                 <h3>${product.name}</h3>
                 <span class="small muted">${formatPrice(product.price)}</span>
+                ${item.colour || item.size ? `<p class="cart-variant">${[item.colour, item.size].filter(Boolean).join(" · ")}</p>` : ""}
                 <p>
-                  <button class="button-outline remove-item" data-id="${product.id}">
+                  <button class="button-outline remove-item" data-key="${cartItemKey(item)}">
                     Remove
                   </button>
                 </p>
               </div>
-              <input class="cart-qty" data-id="${product.id}" type="number" min="1"
+              <input class="cart-qty" data-key="${cartItemKey(item)}" type="number" min="1"
                 value="${item.qty}" aria-label="Quantity for ${product.name}">
             </div>`;
         }).join("")}
@@ -377,7 +523,7 @@ function renderCart() {
 
   cartElement.querySelectorAll(".remove-item").forEach((button) => {
     button.addEventListener("click", () => {
-      const updatedCart = readCart().filter((item) => item.id !== button.dataset.id);
+      const updatedCart = readCart().filter((item) => cartItemKey(item) !== button.dataset.key);
       writeCart(updatedCart);
       renderCart();
     });
@@ -386,7 +532,7 @@ function renderCart() {
   cartElement.querySelectorAll(".cart-qty").forEach((input) => {
     input.addEventListener("change", () => {
       const updatedCart = readCart();
-      const item = updatedCart.find((entry) => entry.id === input.dataset.id);
+      const item = updatedCart.find((entry) => cartItemKey(entry) === input.dataset.key);
 
       if (item) item.qty = Math.max(1, Number(input.value));
       writeCart(updatedCart);
@@ -445,7 +591,7 @@ function initializeCategory() {
   if (!grid) return;
 
   const category = new URLSearchParams(window.location.search).get("category")
-    || "Leather Goods";
+    || "Bags";
   const title = document.querySelector("#category-title");
   const breadcrumb = document.querySelector("#category-crumb");
 
@@ -525,9 +671,29 @@ document.addEventListener("DOMContentLoaded", () => {
     element.innerHTML = socialLinks;
   });
 
+  // Wishlist controls use one delegated handler for static and filtered cards.
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-wishlist]");
+    if (!button) return;
+
+    const wishlist = readWishlist();
+    const productId = button.dataset.wishlist;
+    const isSaved = wishlist.includes(productId);
+    const updatedWishlist = isSaved
+      ? wishlist.filter((id) => id !== productId)
+      : [...wishlist, productId];
+
+    localStorage.setItem("aether-wishlist", JSON.stringify(updatedWishlist));
+    updateWishlistControls();
+    renderWishlistPage();
+    showToast(isSaved ? "Removed from your wishlist" : "Added to your wishlist");
+  });
+
   updateCartCount();
   renderProducts(".product-grid[data-products]");
   renderProductDetail();
+  renderWishlistPage();
+  updateWishlistControls();
   renderCart();
   initializeShop();
   initializeCategory();
